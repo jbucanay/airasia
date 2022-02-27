@@ -1,25 +1,41 @@
-#cardlist {
-    
+.cardcont {
+   
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items:flex-start;
     margin-left: 20%;
     margin-right: 20%;
     margin-bottom: 3%; 
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+    
 }
 
-.card {
-    margin-top: 2%;
-}
 
-#cardCont {
-    border: red solid 2px;
-}
-pre {
-    visibility: hidden;
-}
 
 a {
     text-decoration: none;
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20%;
+    margin-right: 30%;
+}
+
+#main {
+    
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+#account {
+    margin-right: 2%;
+}
+
+.card {
+    margin: 2%;
+    
 }

@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <style rel="stylesheet" href="cardlist.css"> </style>
+    <style type="text/css">
+      <?php
+      include 'cardlist.css'
+      ?>
+
+    </style>
     
     <title>Air Asia | Card List</title>
 </head>
@@ -15,12 +20,14 @@
     <br>
     
     <br>
-    <div class="btn-group">
-        <a href="../addcustomer/addcustomer.php" class="btn btn-primary" aria-current="page">Add Customer</a>
-        <pre>Next card</pre>
+    
+    <div class="btn-group" id='buttons'>
+        <a href="../addcustomer/addcustomer.php" class="btn btn-primary" aria-current="page" id='account'>Add Account</a>
         <a href="../addcard/addcard.php" class="btn btn-primary">Add Card</a>
       </div>
+      
     <br>
+    <div class='cardcont'>
     <?php 
 require_once "../login/login.php";
 
@@ -43,8 +50,8 @@ for ($i=0;$i<$rows;++$i){
   $cardId = $row['cardId'];
   
   echo <<<_END
-  
-   <div id="cardlist">
+ 
+   <div class='card'>
         <a href="../carddetails/card-details.php?cardId=$cardId">
     <div class="card" style="width: 18rem;" class="card">
         <img src="https://images.unsplash.com/photo-1512916206820-bd6d503c003e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="gift card">
@@ -55,14 +62,16 @@ for ($i=0;$i<$rows;++$i){
           <p class="card-text">$points</p>
         </div>
       </div></a>
-     
+    </div> 
+    
+  
   _END;
 }
 
 if(isset($_GET['delete'])){
   $id = $_GET['delete'];
   $connection->query("DELETE FROM giftcard where cardId= $id");
-  header("Location: ../cardlist/card-list.php");
+
   
       
       
@@ -72,7 +81,7 @@ if(isset($_GET['delete'])){
 
 
 ?>
-
+</div>
 </body>
 </html>
 
