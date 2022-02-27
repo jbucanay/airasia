@@ -10,33 +10,59 @@
     <title>Air Asia | Card Update</title>
 </head>
 <body>
-    <form class="col-lg-6 offset-lg-3 ">
-        <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Update Image</label>
-            <div class="col-sm-10">
-              <input type="file" class="form-control" id="inputEmail3">
-            </div>
-          </div>
-        <div class="row mb-3">
-          <label for="inputEmail3" class="col-sm-2 col-form-label">Update Name</label>
+<?php 
+
+require_once "../server/auth.php";
+
+$connection = new mysqli($host, $us, $pw, $db);
+$cardId = $_GET['cardId'];
+if($connection->connect_error) die ("Connection not made");
+$query = "SELECT * FROM giftcard WHERE cardId = $cardId";
+$result = $connection->query($query);
+if(!$result) die ("Database access failed");
+
+$row = $result->fetch_array(MYSQLI_ASSOC);
+
+
+for($i = 0; $i < count($row); ++$i)
+    $cardImage = $row['cardImage'];
+    $cardName= $row['cardName'];
+    $cardType= $row['cardType'];
+    $points = $row['points'];
+    $cardId = $row['cardId'];
+    echo <<<_END
+      <form class="col-lg-6 offset-lg-3 " action="card-update.php" method="post">
+      <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Card Image</label>
           <div class="col-sm-10">
-            <input class="form-control" id="inputEmail3">
+            <input type="text" class="form-control" id="inputEmail3" name="cardImage" placeholder="paste image url here" value='$cardImage'>
           </div>
         </div>
-        <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Update Type</label>
-            <div class="col-sm-10">
-              <input class="form-control" >
-            </div>
-          </div>
-        <div class="row mb-3">
-          <label for="inputPassword3" class="col-sm-2 col-form-label">Update Points</label>
+      <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Card Name</label>
+        <div class="col-sm-10">
+          <input class="form-control" id="inputEmail3" name="cardName" value='$cardName'>
+        </div>
+      </div>
+      <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Card Type</label>
           <div class="col-sm-10">
-            <input type="number" class="form-control">
+            <input class="form-control" name="cardType" value='$cardType'>
           </div>
         </div>
-        
-        <button type="submit" class="btn btn-primary" ><a href="../cardlist/card-list.htm" target="_self">Submit</a></button>
-      </form>
+      <div class="row mb-3">
+        <label for="inputPassword3" class="col-sm-2 col-form-label">Points</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" name="points" value='$points'>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary" >Submit</button>
+    </form>
+
+    _END;
+?>
+
 </body>
 </html>
+

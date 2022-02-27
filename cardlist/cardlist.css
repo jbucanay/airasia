@@ -1,9 +1,9 @@
-#cardlist {
+/* #cardlist {
     
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    align-items:baseline;
+    align-items:flex-start;
     margin-left: 20%;
     margin-right: 20%;
     margin-bottom: 3%; 
@@ -13,8 +13,8 @@
     margin-top: 2%;
 }
 
-#main {
-    background-color: red;
+#cardCont {
+    border: red solid 2px;
 }
 pre {
     visibility: hidden;
@@ -22,4 +22,4 @@ pre {
 
 a {
     text-decoration: none;
-}
+} */

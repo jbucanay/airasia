@@ -25,7 +25,9 @@ if($connection->connect_error) die ("Connection not made");
 $query = "SELECT * FROM giftcard WHERE cardId = $cardId";
 $result = $connection->query($query);
 if(!$result) die ("Database access failed");
+
 $row = $result->fetch_array(MYSQLI_ASSOC);
+
 
 for($i = 0; $i < count($row); ++$i)
     $cardImage = $row['cardImage'];
@@ -42,25 +44,16 @@ for($i = 0; $i < count($row); ++$i)
         <p class="card-text">$points</p>
         </div>
         <div>
-        <button type="submit" class="btn btn-primary" ><a href="../updatecard/card-update.htm" target="_self">Update</a></button>
-        <form action="card-details.php" method='post'>
-        <input type='hidden' name='delete' value='yes'>
-        <input type='hidden' name='cardDel' value=$cardId>
-        <button type="submit" class="btn btn-primary" >Delete</button>
-        </form>
+        <button type="submit" class="btn btn-primary" ><a href="../updatecard/card-update.php?cardId=$cardId">Update</a></button>
+        <button type="submit" class="btn btn-primary" ><a href="../cardlist/card-list.php?delete=$cardId">Delete</a></button>
+      
         </div>
 
     _END;
 
-if(isset($_POST['delete']) && !empty($_POST('cardDel'))){
-    
-    $cardDel = $_POST['cardDel'];
-    $delete = "DELETE FROM giftcard WHERE cardId = 4";
-    $result = $connection->query($delete);
-    header("Location: ../cardlist/card-list.php");
-    
-}
-$connection->close();
+
+
+
 
 
 

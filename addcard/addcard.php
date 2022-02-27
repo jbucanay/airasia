@@ -36,7 +36,7 @@
           </div>
         </div>
         
-        <button type="submit" class="btn btn-primary" ><a href="" target="_self">Submit</a></button>
+        <button type="submit" class="btn btn-primary" >Submit</button>
       </form>
 </body>
 </html>
@@ -53,16 +53,16 @@ if(isset($_POST['cardImage']) && isset($_POST['cardName']) && isset($_POST['card
   $cardName = $_POST['cardName'];
   $cardType = $_POST['cardType'];
   $points = $_POST['points'];
-  echo "$cardImage <br>";
-  echo "$cardName <br>";
-  echo "$cardType <br>";
-  echo "$points <br>";
+ 
 
   $query = "INSERT INTO giftcard (cardImage,cardName,cardType,points) VALUES('$cardImage','$cardName','$cardType',$points)";
   $result = $connection->query($query);
   if(!$result) echo "Insert failed <br>";
+  if($result){
 
-  header("Location: ../cardlist/card-list.php");
+    header("Location: ../cardlist/card-list.php");
+  }
+  
   
 }
 

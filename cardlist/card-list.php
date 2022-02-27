@@ -42,6 +42,7 @@ for ($i=0;$i<$rows;++$i){
   $cardId = $row['cardId'];
   
   echo <<<_END
+  
    <div id="cardlist">
         <a href="../carddetails/card-details.php?cardId=$cardId">
     <div class="card" style="width: 18rem;" class="card">
@@ -51,7 +52,17 @@ for ($i=0;$i<$rows;++$i){
           <p class="card-text">$points</p>
         </div>
       </div></a>
+     
   _END;
+}
+
+if(isset($_GET['delete'])){
+  $id = $_GET['delete'];
+  $connection->query("DELETE FROM giftcard where cardId= $id");
+  header("Location: ../cardlist/card-list.php");
+  
+      
+      
 }
 
 $connection->close();
