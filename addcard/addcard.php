@@ -42,17 +42,10 @@
 </html>
 
 <?php 
-require_once '../login/login.php';
+require_once '../server/auth.php';
 
-try
-{
-$pdo = new PDO($attr, $us,$pw,$opts);
-} 
-
-catch (PDOException $e)
-{
-throw new PDOException($e->getMessage(), (int)$e->getCode());
-}
+$connection = new mysqli($host,$us,$pw,$db);
+if($connection->connect_error) die("Connection not made");
 
 
 ?>

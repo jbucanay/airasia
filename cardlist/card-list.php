@@ -14,9 +14,9 @@
     
     <br>
     <div class="btn-group">
-        <a href="../addcustomer/addcustomer.htm" class="btn btn-primary" aria-current="page">Add Customer</a>
+        <a href="../addcustomer/addcustomer.php" class="btn btn-primary" aria-current="page">Add Customer</a>
         <pre>Next card</pre>
-        <a href="../addcard/addcard.htm" class="btn btn-primary">Add Card</a>
+        <a href="../addcard/addcard.php" class="btn btn-primary">Add Card</a>
       </div>
     <br>
     <div id="cardlist">
