@@ -49,6 +49,7 @@ for ($i=0;$i<$rows;++$i){
         <img src="$cardImage" class="card-img-top" alt="gift card">
         <div class="card-body">
           <h5 class="card-title">$cardName</h5>
+          <p class="card-text">$cardType</p>
           <p class="card-text">$points</p>
         </div>
       </div></a>
@@ -65,24 +66,7 @@ if(isset($_GET['delete'])){
       
 }
 
-if(isset($_GET['update'])){
-  $id = $_POST['cardId'];
-  $cardImage = $_GET['cardImage'];
-  $cardName= $_POST['cardName'];
-  $cardType= $_POST['cardType'];
-  $points = $_POST['points'];
-  $qry = "UPDATE giftcard SET cardImage='$cardImage',cardName='$cardName',cardType='$cardType',points=$points";
-  $res = $connection->query($qry);
-  if(!$res) die ($connection->error);
-  
 
-  
-  
-      
-      
-}
-
-$connection->close();
 ?>
 
 </body>

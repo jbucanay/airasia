@@ -31,7 +31,7 @@ for($i = 0; $i < count($row); ++$i)
     $points = $row['points'];
     $cardId = $row['cardId'];
     echo <<<_END
-      <form class="col-lg-6 offset-lg-3 " action="card-update.php" method="post">
+      <form class="col-lg-6 offset-lg-3 " action="card-update.php" method="POST">
       <div class="row mb-3">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Card Image</label>
           <div class="col-sm-10">
@@ -56,13 +56,31 @@ for($i = 0; $i < count($row); ++$i)
           <input type="number" class="form-control" name="points" value='$points'>
         </div>
       </div>
-      
-      <button type="submit" class="btn btn-primary" <a href="../cardlist/card-list.php?update=$cardId">Update</a></button>
+      <input type='hidden' name='update' value='yes'>
+      <input type='hidden' name='cardId' value='$cardId'>
+      <button type="submit" class="btn btn-primary"> Update</button>
     </form>
 
     _END;
     
-
+    if(isset($_POST['update'])){
+      $id = $_POST['cardId'];
+      $cardImage = $_POST['cardImage'];
+      $cardName= $_POST['cardName'];
+      $cardType= $_POST['cardType'];
+      $points = $_POST['points'];
+      $qry = "UPDATE giftcard SET cardImage='$cardImage',cardName='$cardName',cardType='$cardType',points=$points WHERE cardId=$id";
+      $res = $connection->query($qry);
+      if(!$res) die ($connection->error);
+      
+    
+      
+      
+          
+          
+    }
+    
+    $connection->close();
 
 
 
