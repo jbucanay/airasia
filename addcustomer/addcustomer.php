@@ -42,7 +42,7 @@
           </div>
         </div>
         
-        <button type="submit" class="btn btn-primary" ><a href="../cardlist/card-list.php" target="_self">Submit</a></button>
+        <button type="submit" class="btn btn-primary" ><a href="" target="_self">Submit</a></button>
       </form>
 </body>
 </html>
@@ -62,8 +62,12 @@ if (isset($_POST['userName']) && isset($_POST['password']) && isset($_POST['firs
   $query = "INSERT INTO user (userName,password,firstName,lastName,role) VALUES('$userName','$password','$firstName','$lastName','$role')";
   $result = $connection->query($query);
   if(!$result) echo "Insert failed <br>";
+  header("Location: ../cardlist/card-list.php");
   
 
 }
+
+$connection->close();
+
 
 ?>

@@ -10,33 +10,33 @@
     <title>Air Asia | Add Card</title>
 </head>
 <body>
-    <form class="col-lg-6 offset-lg-3 ">
+    <form class="col-lg-6 offset-lg-3 " action="addcard.php" method="post">
         <div class="row mb-3">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Card Image</label>
             <div class="col-sm-10">
-              <input type="file" class="form-control" id="inputEmail3">
+              <input type="text" class="form-control" id="inputEmail3" name="cardImage" placeholder="paste image url here">
             </div>
           </div>
         <div class="row mb-3">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Card Name</label>
           <div class="col-sm-10">
-            <input class="form-control" id="inputEmail3">
+            <input class="form-control" id="inputEmail3" name="cardName">
           </div>
         </div>
         <div class="row mb-3">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Card Type</label>
             <div class="col-sm-10">
-              <input class="form-control" >
+              <input class="form-control" name="cardType">
             </div>
           </div>
         <div class="row mb-3">
           <label for="inputPassword3" class="col-sm-2 col-form-label">Points</label>
           <div class="col-sm-10">
-            <input type="number" class="form-control">
+            <input type="number" class="form-control" name="points" >
           </div>
         </div>
         
-        <button type="submit" class="btn btn-primary" ><a href="../cardlist/card-list.htm" target="_self">Submit</a></button>
+        <button type="submit" class="btn btn-primary" ><a href="" target="_self">Submit</a></button>
       </form>
 </body>
 </html>
@@ -45,7 +45,28 @@
 require_once '../server/auth.php';
 
 $connection = new mysqli($host,$us,$pw,$db);
+$res = $connection->query("SELECT * FROM giftcard");
+
 if($connection->connect_error) die("Connection not made");
+if(isset($_POST['cardImage']) && isset($_POST['cardName']) && isset($_POST['cardType']) && isset($_POST['points'])){
+  $cardImage = $_POST['cardImage'];
+  $cardName = $_POST['cardName'];
+  $cardType = $_POST['cardType'];
+  $points = $_POST['points'];
+  echo "$cardImage <br>";
+  echo "$cardName <br>";
+  echo "$cardType <br>";
+  echo "$points <br>";
+
+  $query = "INSERT INTO giftcard (cardImage,cardName,cardType,points) VALUES('$cardImage','$cardName','$cardType',$points)";
+  $result = $connection->query($query);
+  if(!$result) echo "Insert failed <br>";
+
+  header("Location: ../cardlist/card-list.php");
+  
+}
+
+$connection->close()
 
 
 ?>

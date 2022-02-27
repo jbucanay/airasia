@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="cardlist.css">
     <title>Air Asia | Card List</title>
 </head>
-<body >
+<body id='main'>
+
     <br>
     
     <br>
@@ -19,64 +20,43 @@
         <a href="../addcard/addcard.php" class="btn btn-primary">Add Card</a>
       </div>
     <br>
-    <div id="cardlist">
-        <a href="../carddetails/card-details.htm">
+    <?php 
+require_once "../server/auth.php";
+
+$connection = new mysqli($host, $us, $pw, $db);
+
+if($connection->connect_error) die ("Connection not made");
+$query = "SELECT * FROM giftcard";
+$result = $connection->query($query);
+if(!$result) die ("Database access failed");
+$rows = $result->num_rows;
+
+for ($i=0;$i<$rows;++$i){
+ 
+  $row = $result->fetch_array(MYSQLI_ASSOC);
+  
+  $cardImage = $row['cardImage'];
+  $cardName = $row['cardName'];
+  $cardType = $row['cardType'];
+  $points = $row['points'];
+  $cardId = $row['cardId'];
+  
+  echo <<<_END
+   <div id="cardlist">
+        <a href="../carddetails/card-details.php?cardId=$cardId">
     <div class="card" style="width: 18rem;" class="card">
-        <img src="../images/gift-card.png" class="card-img-top" alt="gift card">
+        <img src="$cardImage" class="card-img-top" alt="gift card">
         <div class="card-body">
-          <h5 class="card-title">Preferred</h5>
-          <p class="card-text">50 points</p>
+          <h5 class="card-title">$cardName</h5>
+          <p class="card-text">$points</p>
         </div>
       </div></a>
-      <a href="../carddetails/card-details.htm">
-      <div class="card" style="width: 18rem;" class="card">
-        <img src="../images/gift-card.png" class="card-img-top" alt="gift card">
-        <div class="card-body">
-          <h5 class="card-title">Gift of love</h5>
-          <p class="card-text">30 points</p>
-        </div>
-      </div></a>
-      <a href="../carddetails/card-details.htm">
-      <div class="card" style="width: 18rem;" class="card">
-        <img src="../images/gift-card.png" class="card-img-top" alt="gift card">
-        <div class="card-body">
-          <h5 class="card-title">Show appreciation</h5>
-          <p class="card-text">20 points</p>
-        </div>
-      </div></a>
-      <a href="../carddetails/card-details.htm">
-      <div class="card" style="width: 18rem;" class="card">
-        <img src="../images/gift-card.png" class="card-img-top" alt="gift card">
-        <div class="card-body">
-          <h5 class="card-title">Premium</h5>
-          <p class="card-text">100 points</p>
-        </div>
-      </div> </a>
-      <a href="../carddetails/card-details.htm">
-      <div class="card" style="width: 18rem;" class="card">
-        <img src="../images/gift-card.png" class="card-img-top" alt="gift card">
-        <div class="card-body">
-          <h5 class="card-title">Gold card</h5>
-          <p class="card-text">200 points</p>
-        </div>
-      </div></a>
-      <a href="../carddetails/card-details.htm">
-      <div class="card" style="width: 18rem;" class="card">
-        <img src="../images/gift-card.png" class="card-img-top" alt="gift card">
-        <div class="card-body">
-          <h5 class="card-title">Members card</h5>
-          <p class="card-text">300 points</p>
-        </div>
-      </div></a>
-      <a href="../carddetails/card-details.htm">
-      <div class="card" style="width: 18rem;" class="card">
-        <img src="../images/gift-card.png" class="card-img-top" alt="gift card">
-        <div class="card-body">
-          <h5 class="card-title">Standard</h5>
-          <p class="card-text">400 points</p>
-        </div>
-      </div></a>
-      
-    </div>
+  _END;
+}
+
+$connection->close();
+?>
+
 </body>
 </html>
+
