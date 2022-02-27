@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="cardupdate.css">
+    <style rel="stylesheet" href="cardupdate.css"> </style>
     <title>Air Asia | Card Update</title>
 </head>
 <body>
@@ -48,7 +48,7 @@ for($i = 0; $i < $rows; ++$i){
           <div class="row mb-3">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Card Value</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control" id="inputEmail3" name="cardValue"  value='$row[cardValue]'>
+              <input type="number" class="form-control" id="inputEmail3" name="cardValue"  value='$row[cardValue]' step='any'>
             </div>
           </div>
         <div class="row mb-3">
@@ -58,8 +58,8 @@ for($i = 0; $i < $rows; ++$i){
           </div>
         </div>
         <input type='hidden' name='update' value='yes'>
-        <input type='hidden' name='cardId' value='$cardId'>
-        <button type="submit" class="btn btn-primary"> Update</button>
+        <input type='hidden' name='cardId' value=$row[cardId]>
+        <button type="submit" class="btn btn-primary" value='Update'> Update</button>
       </form>
       _END;
 
@@ -68,17 +68,30 @@ for($i = 0; $i < $rows; ++$i){
   }
 
   if(isset($_POST['update'])){
-    $cardImage = $_POST['cardImage'];
+    $cardValue = (double)$_POST['cardValue'];
     $cardName= $_POST['cardName'];
     $cardType= $_POST['cardType'];
-    $points = $_POST['points'];
-    $cardId = $_POST['cardId'];
-  
-    $qry = "UPDATE giftcard SET cardImage='$cardImage', cardName='$cardName', cardType='$cardType', $points=$points WHERE cardId=$cardId";
+    $points = (int)$_POST['points'];
+    $cardId = (int)$_POST['cardId'];
+    
+    echo gettype($cardValue). "<br>";
+    echo $cardValue ."<br>";
+    echo "$cardName <br>";
+    echo "$cardType <br>";
+    echo "$points <br>";
+    echo gettype($cardId) ."<br>";
+
+    $qry = "UPDATE giftcard SET cardvalue=$cardValue, cardName='$cardName', cardType='$cardType', points=$points WHERE cardId = $cardId";
     $res = $connection->query($qry);
-    print_r($res);
-    if(!$res) die ("Update failed");
-    header("Location: ../cardlist/card-list.php");
+    if(!$res) die ("update failed");
+
+    if($res){
+      header("Location: ../cardlist/card-list.php");
+    }
+    
+    
+    
+    
   
   
   }
