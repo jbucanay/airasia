@@ -65,6 +65,23 @@ if(isset($_GET['delete'])){
       
 }
 
+if(isset($_GET['update'])){
+  $id = $_POST['cardId'];
+  $cardImage = $_GET['cardImage'];
+  $cardName= $_POST['cardName'];
+  $cardType= $_POST['cardType'];
+  $points = $_POST['points'];
+  $qry = "UPDATE giftcard SET cardImage='$cardImage',cardName='$cardName',cardType='$cardType',points=$points";
+  $res = $connection->query($qry);
+  if(!$res) die ($connection->error);
+  
+
+  
+  
+      
+      
+}
+
 $connection->close();
 ?>
 

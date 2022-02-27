@@ -57,10 +57,15 @@ for($i = 0; $i < count($row); ++$i)
         </div>
       </div>
       
-      <button type="submit" class="btn btn-primary" >Submit</button>
+      <button type="submit" class="btn btn-primary" <a href="../cardlist/card-list.php?update=$cardId">Update</a></button>
     </form>
 
     _END;
+    
+
+
+
+
 ?>
 
 </body>
