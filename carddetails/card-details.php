@@ -17,7 +17,7 @@
 
 
 
-require_once "../server/auth.php";
+require_once "../login/login.php";
 
 $connection = new mysqli($host, $us, $pw, $db);
 $cardId = $_GET['cardId'];
@@ -29,18 +29,21 @@ if(!$result) die ("Database access failed");
 $row = $result->fetch_array(MYSQLI_ASSOC);
 
 
-for($i = 0; $i < count($row); ++$i)
-    $cardImage = $row['cardImage'];
+
+    $cardValue = $row['cardValue'];
     $cardName= $row['cardName'];
+    $cardType = $row['cardType'];
     $points = $row['points'];
     $cardId = $row['cardId'];
     
     
     echo <<<_END
         <div class="card" style="width: 50rem;">
-            <img src="$cardImage" class="card-img-top" alt="gift card">
+        <img src="https://images.unsplash.com/photo-1512916206820-bd6d503c003e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="gift card">
         <div class="card-body">
         <h5 class="card-title">$cardName</h5>
+        <p class="card-text">$cardType</p>
+        <p class="card-text">$cardValue</p>
         <p class="card-text">$points</p>
         </div>
         <div>

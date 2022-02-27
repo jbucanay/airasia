@@ -21,7 +21,7 @@
       </div>
     <br>
     <?php 
-require_once "../server/auth.php";
+require_once "../login/login.php";
 
 $connection = new mysqli($host, $us, $pw, $db);
 
@@ -35,7 +35,7 @@ for ($i=0;$i<$rows;++$i){
  
   $row = $result->fetch_array(MYSQLI_ASSOC);
   
-  $cardImage = $row['cardImage'];
+  $cardValue = $row['cardValue'];
   $cardName = $row['cardName'];
   $cardType = $row['cardType'];
   $points = $row['points'];
@@ -46,10 +46,11 @@ for ($i=0;$i<$rows;++$i){
    <div id="cardlist">
         <a href="../carddetails/card-details.php?cardId=$cardId">
     <div class="card" style="width: 18rem;" class="card">
-        <img src="$cardImage" class="card-img-top" alt="gift card">
+        <img src="https://images.unsplash.com/photo-1512916206820-bd6d503c003e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="gift card">
         <div class="card-body">
           <h5 class="card-title">$cardName</h5>
           <p class="card-text">$cardType</p>
+          <h5 class="card-title">$cardValue</h5>
           <p class="card-text">$points</p>
         </div>
       </div></a>
@@ -65,6 +66,8 @@ if(isset($_GET['delete'])){
       
       
 }
+
+
 
 
 ?>

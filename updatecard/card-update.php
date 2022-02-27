@@ -12,75 +12,83 @@
 <body>
 <?php 
 
-require_once "../server/auth.php";
+require_once "../login/login.php";
 
 $connection = new mysqli($host, $us, $pw, $db);
-$cardId = $_GET['cardId'];
 if($connection->connect_error) die ("Connection not made");
+if(isset($_GET['cardId'])){
+$cardId = $_GET['cardId'];
 $query = "SELECT * FROM giftcard WHERE cardId = $cardId";
 $result = $connection->query($query);
 if(!$result) die ("Database access failed");
+$rows = $result->num_rows;
 
-$row = $result->fetch_array(MYSQLI_ASSOC);
 
+for($i = 0; $i < $rows; ++$i){
 
-for($i = 0; $i < count($row); ++$i)
-    $cardImage = $row['cardImage'];
-    $cardName= $row['cardName'];
-    $cardType= $row['cardType'];
-    $points = $row['points'];
-    $cardId = $row['cardId'];
+  $row = $result->fetch_array(MYSQLI_ASSOC);
+    
     echo <<<_END
-      <form class="col-lg-6 offset-lg-3 " action="card-update.php" method="POST">
-      <div class="row mb-3">
-          <label for="inputEmail3" class="col-sm-2 col-form-label">Card Image</label>
+        <form class="col-lg-6 offset-lg-3 " action='card-update.php' method='post'>
+        <img src="https://images.unsplash.com/photo-1512916206820-bd6d503c003e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="gift card">
+        <br>
+        <br>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Card Name</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail3" name="cardImage" placeholder="paste image url here" value='$cardImage'>
+            <input class="form-control" id="inputEmail3" name="cardName" value='$row[cardName]'>
           </div>
         </div>
-      <div class="row mb-3">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">Card Name</label>
-        <div class="col-sm-10">
-          <input class="form-control" id="inputEmail3" name="cardName" value='$cardName'>
-        </div>
-      </div>
-      <div class="row mb-3">
-          <label for="inputEmail3" class="col-sm-2 col-form-label">Card Type</label>
+        <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Card Type</label>
+            <div class="col-sm-10">
+              <input class="form-control" name="cardType" value='$row[cardType]'>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Card Value</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="inputEmail3" name="cardValue"  value='$row[cardValue]'>
+            </div>
+          </div>
+        <div class="row mb-3">
+          <label for="inputPassword3" class="col-sm-2 col-form-label">Points</label>
           <div class="col-sm-10">
-            <input class="form-control" name="cardType" value='$cardType'>
+            <input type="number" class="form-control" name="points" value='$row[points]'>
           </div>
         </div>
-      <div class="row mb-3">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Points</label>
-        <div class="col-sm-10">
-          <input type="number" class="form-control" name="points" value='$points'>
-        </div>
-      </div>
-      <input type='hidden' name='update' value='yes'>
-      <input type='hidden' name='cardId' value='$cardId'>
-      <button type="submit" class="btn btn-primary"> Update</button>
-    </form>
+        <input type='hidden' name='update' value='yes'>
+        <input type='hidden' name='cardId' value='$cardId'>
+        <button type="submit" class="btn btn-primary"> Update</button>
+      </form>
+      _END;
 
-    _END;
-    
-    if(isset($_POST['update'])){
-      $id = $_POST['cardId'];
-      $cardImage = $_POST['cardImage'];
-      $cardName= $_POST['cardName'];
-      $cardType= $_POST['cardType'];
-      $points = $_POST['points'];
-      $qry = "UPDATE giftcard SET cardImage='$cardImage',cardName='$cardName',cardType='$cardType',points=$points WHERE cardId=$id";
-      $res = $connection->query($qry);
-      if(!$res) die ($connection->error);
-      
-    
-      
-      
-          
-          
     }
     
-    $connection->close();
+  }
+
+  if(isset($_POST['update'])){
+    $cardImage = $_POST['cardImage'];
+    $cardName= $_POST['cardName'];
+    $cardType= $_POST['cardType'];
+    $points = $_POST['points'];
+    $cardId = $_POST['cardId'];
+  
+    $qry = "UPDATE giftcard SET cardImage='$cardImage', cardName='$cardName', cardType='$cardType', $points=$points WHERE cardId=$cardId";
+    $res = $connection->query($qry);
+    print_r($res);
+    if(!$res) die ("Update failed");
+    header("Location: ../cardlist/card-list.php");
+  
+  
+  }
+    
+    
+
+  
+   
+$connection->close();
+    
 
 
 

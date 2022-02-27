@@ -48,7 +48,7 @@
 </html>
 
 <?php 
-require_once '../server/auth.php';
+require_once "../login/login.php";
 
 $connection = new mysqli($host,$us,$pw,$db);
 if($connection->connect_error) die("Connection not made");

@@ -12,12 +12,6 @@
 <body>
     <form class="col-lg-6 offset-lg-3 " action="addcard.php" method="post">
         <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Card Image</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputEmail3" name="cardImage" placeholder="paste image url here">
-            </div>
-          </div>
-        <div class="row mb-3">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Card Name</label>
           <div class="col-sm-10">
             <input class="form-control" id="inputEmail3" name="cardName">
@@ -27,6 +21,12 @@
             <label for="inputEmail3" class="col-sm-2 col-form-label">Card Type</label>
             <div class="col-sm-10">
               <input class="form-control" name="cardType">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Card Value</label>
+            <div class="col-sm-10">
+              <input class="form-control" name="cardValue" type="number" step="any">
             </div>
           </div>
         <div class="row mb-3">
@@ -42,20 +42,20 @@
 </html>
 
 <?php 
-require_once '../server/auth.php';
+require_once "../login/login.php";
 
 $connection = new mysqli($host,$us,$pw,$db);
 $res = $connection->query("SELECT * FROM giftcard");
 
 if($connection->connect_error) die("Connection not made");
-if(isset($_POST['cardImage']) && isset($_POST['cardName']) && isset($_POST['cardType']) && isset($_POST['points'])){
-  $cardImage = $_POST['cardImage'];
+if(isset($_POST['cardValue']) && isset($_POST['cardName']) && isset($_POST['cardType']) && isset($_POST['points'])){
+  $cardValue = $_POST['cardValue'];
   $cardName = $_POST['cardName'];
   $cardType = $_POST['cardType'];
   $points = $_POST['points'];
  
 
-  $query = "INSERT INTO giftcard (cardImage,cardName,cardType,points) VALUES('$cardImage','$cardName','$cardType',$points)";
+  $query = "INSERT INTO giftcard (cardName,cardType,cardValue,points) VALUES('$cardName','$cardType','$cardValue',$points)";
   $result = $connection->query($query);
   if(!$result) echo "Insert failed <br>";
   if($result){
