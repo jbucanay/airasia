@@ -12,6 +12,10 @@
       ?>
 
     </style>
+    <?php 
+    include_once "../navigation/navbar.php"
+    
+    ?>
     
     <title>Air Asia | Card List</title>
 </head>
@@ -29,9 +33,9 @@
     <br>
     <div class='cardcont'>
     <?php 
-require_once "../login/login.php";
 
-$connection = new mysqli($host, $us, $pw, $db);
+$connection = new mysqli($host,$us,$pw,$db);
+
 
 if($connection->connect_error) die ("Connection not made");
 $query = "SELECT * FROM giftcard";
