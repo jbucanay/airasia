@@ -19,6 +19,12 @@ include_once "../navigation/navbar.php"
 
 ?>
     <title>Air Asia | Card Details</title>
+    <?php 
+if(!isset($_SESSION['user'])){
+  header("Location: ../login/login.php");
+}
+
+?>
 </head>
 <body class="main">
     <br>
@@ -36,6 +42,7 @@ if($connection->connect_error) die ("Connection not made");
 $query = "SELECT * FROM giftcard WHERE cardId = $cardId";
 $result = $connection->query($query);
 if(!$result) die ("Database access failed");
+print_r($_SESSION['user']);
 
 $row = $result->fetch_array(MYSQLI_ASSOC);
 
@@ -59,7 +66,7 @@ $row = $result->fetch_array(MYSQLI_ASSOC);
         </div>
         <div>
         <button type="submit" class="btn btn-primary" ><a href="../updatecard/card-update.php?cardId=$cardId" class='link'>Update</a></button>
-        <button type="submit" class="btn btn-primary" ><a href="../cardlist/card-list.php?delete=$cardId" class='link'>Delete</a></button>
+        <button type="submit" class="btn btn-primary" ><a href="delete.php?delete=$cardId" class='link'>Delete</a></button>
       
         </div>
 

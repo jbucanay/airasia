@@ -9,6 +9,15 @@
     <?php 
         session_start()
     ?>
+    <style type="text/css">
+
+    <?php 
+    include "navbar.css"
+    
+    
+    ?>
+
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -28,17 +37,16 @@
         if(isset($_SESSION['user'])){
             echo <<<_end
             
-            <a class="nav-link" href="#">Features</a>
-            <a class="nav-link" href="#">Pricing</a>
-            <a class="nav-link" href="#">Log out</a>
+            <a class="nav-link" href="../cardlist/card-list.php">Gift Cards</a>
+            <a class="nav-link" href="../navigation/logout.php">Log out</a>
             
 
             _end;
 
             if($_SESSION['user']['role'] == 'Admin'){
                 echo <<<_END
-                <a class="nav-link" href="#">Add Customer</a>
-                <a class="nav-link" href="#">Add Giftcard</a>
+                <a class="nav-link" href="../addcustomer/addcustomer.php">Add Customer</a>
+                <a class="nav-link" href="../addcard/addcard.php">Add Giftcard</a>
 
                 _END;
 

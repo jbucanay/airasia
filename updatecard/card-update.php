@@ -19,6 +19,12 @@
   
   ?>
     <title>Air Asia | Card Update</title>
+    <?php 
+if(!isset($_SESSION['user'])){
+  header("Location: ../login/login.php");
+}
+
+?>
 </head>
 <body>
 <?php 

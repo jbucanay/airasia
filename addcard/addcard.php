@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +15,16 @@
   ?>
   
   </style>
+  <?php 
+  include_once "../navigation/navbar.php"
+  ?>
     <title>Air Asia | Add Card</title>
+    <?php 
+if(!isset($_SESSION['user'])){
+  header("Location: ../login/login.php");
+}
+
+?>
 </head>
 <body>
     <form class="col-lg-6 offset-lg-3 " action="addcard.php" method="post">
@@ -42,13 +53,13 @@
           </div>
         </div>
         
-        <button type="submit" class="btn btn-primary" >Submit</button>
+        <button type="submit" class="btn btn-danger" >Submit</button>
       </form>
 </body>
 </html>
 
 <?php 
-require_once "../login/login.php";
+
 
 $connection = new mysqli($host,$us,$pw,$db);
 $res = $connection->query("SELECT * FROM giftcard");

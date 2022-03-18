@@ -18,6 +18,12 @@
   </style>
   
     <title>Air Asia | Add Customer</title>
+    <?php 
+if(!isset($_SESSION['user'])){
+  header("Location: ../login/login.php");
+}
+
+?>
 </head>
 <body>
     <form class="col-lg-6 offset-lg-3 " action="addcustomer.php" method="post" id='form'>

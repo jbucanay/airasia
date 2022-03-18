@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +21,12 @@
     ?>
     
     <title>Air Asia | Card List</title>
+    <?php 
+if(!isset($_SESSION['user'])){
+  header("Location: ../login/login.php");
+}
+
+?>
 </head>
 <body id='main'>
 
@@ -26,10 +34,7 @@
     
     <br>
     
-    <div class="btn-group" id='buttons'>
-        <a href="../addcustomer/addcustomer.php" class="btn btn-primary" aria-current="page" id='account'>Add Account</a>
-        <a href="../addcard/addcard.php" class="btn btn-primary">Add Card</a>
-      </div>
+   
       
     <br>
     <div class='cardcont'>
@@ -43,7 +48,7 @@ $query = "SELECT * FROM giftcard";
 $result = $connection->query($query);
 if(!$result) die ("Database access failed");
 $rows = $result->num_rows;
-print_r($_SESSION['user']);
+
 
 for ($i=0;$i<$rows;++$i){
  
@@ -74,14 +79,7 @@ for ($i=0;$i<$rows;++$i){
   _END;
 }
 
-if(isset($_GET['delete'])){
-  $id = $_GET['delete'];
-  $connection->query("DELETE FROM giftcard where cardId= $id");
 
-  
-      
-      
-}
 
 
 
