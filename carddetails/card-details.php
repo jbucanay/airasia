@@ -53,6 +53,8 @@ $row = $result->fetch_array(MYSQLI_ASSOC);
     $cardType = $row['cardType'];
     $points = $row['points'];
     $cardId = $row['cardId'];
+    $admin_link = $_SESSION['user']['role'] == 'Admin' ? '': 'hidden';
+    $cust_link = $_SESSION['user']['role'] == 'Customer' ? '': 'hidden';
     
     
     echo <<<_END
@@ -61,12 +63,13 @@ $row = $result->fetch_array(MYSQLI_ASSOC);
         <div class="card-body">
         <h5 class="card-title">$cardName</h5>
         <p class="card-text">$cardType</p>
-        <p class="card-text">$cardValue</p>
+        <p class="card-text">$$cardValue</p>
         <p class="card-text">$points</p>
         </div>
         <div>
-        <button type="submit" class="btn btn-primary" ><a href="../updatecard/card-update.php?cardId=$cardId" class='link'>Update</a></button>
-        <button type="submit" class="btn btn-primary" ><a href="delete.php?delete=$cardId" class='link'>Delete</a></button>
+        <button type="submit" class="btn btn-warning" $admin_link><a href="../updatecard/card-update.php?cardId=$cardId" class='link'>Update</a></button>
+        <button type="submit" class="btn btn-warning" $admin_link><a href="delete.php?delete=$cardId" class='link'>Delete</a></button>
+        <button type="submit" class="btn btn-warning" $cust_link><a href="../cart/cart.php?cardId=$cardId" class='link'>Add to cart</a></button>
       
         </div>
 

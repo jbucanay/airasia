@@ -3,3 +3,8 @@ form {
     margin-top: 3%;
 }
 
+#cart_link {
+    text-decoration: none;
+    color: red;
+}
+
