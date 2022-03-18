@@ -13,6 +13,11 @@ include 'carddetails.css'
 ?>
 
 </style>
+<?php 
+
+include_once "../navigation/navbar.php"
+
+?>
     <title>Air Asia | Card Details</title>
 </head>
 <body class="main">
@@ -23,7 +28,7 @@ include 'carddetails.css'
 
 
 
-require_once "../login/login.php";
+
 
 $connection = new mysqli($host, $us, $pw, $db);
 $cardId = $_GET['cardId'];
@@ -53,8 +58,8 @@ $row = $result->fetch_array(MYSQLI_ASSOC);
         <p class="card-text">$points</p>
         </div>
         <div>
-        <button type="submit" class="btn btn-primary" ><a href="../updatecard/card-update.php?cardId=$cardId">Update</a></button>
-        <button type="submit" class="btn btn-primary" ><a href="../cardlist/card-list.php?delete=$cardId">Delete</a></button>
+        <button type="submit" class="btn btn-primary" ><a href="../updatecard/card-update.php?cardId=$cardId" class='link'>Update</a></button>
+        <button type="submit" class="btn btn-primary" ><a href="../cardlist/card-list.php?delete=$cardId" class='link'>Delete</a></button>
       
         </div>
 

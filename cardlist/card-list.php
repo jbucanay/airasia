@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
     <style type="text/css">
       <?php
       include 'cardlist.css'
@@ -42,6 +43,7 @@ $query = "SELECT * FROM giftcard";
 $result = $connection->query($query);
 if(!$result) die ("Database access failed");
 $rows = $result->num_rows;
+print_r($_SESSION['user']);
 
 for ($i=0;$i<$rows;++$i){
  
@@ -56,7 +58,7 @@ for ($i=0;$i<$rows;++$i){
   echo <<<_END
  
    <div class='card'>
-        <a href="../carddetails/card-details.php?cardId=$cardId">
+        <a href="../carddetails/card-details.php?cardId=$cardId" id='cards'>
     <div class="card" style="width: 18rem;" class="card">
         <img src="https://images.unsplash.com/photo-1512916206820-bd6d503c003e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="gift card">
         <div class="card-body">

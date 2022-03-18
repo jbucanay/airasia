@@ -37,5 +37,11 @@ a {
 
 .card {
     margin: 2%;
+    color: black;
     
+}
+
+#cards {
+    
+    text-decoration: none;
 }

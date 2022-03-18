@@ -1,14 +1,13 @@
-.main {
-    padding-left: 10%;
-    margin: auto;
+
+.card {
+    margin-left: 10%;
 }
 
-a {
-    color: inherit;
+.link {
+    color: white;
     text-decoration: none;
 }
 
-a:hover {
+.link:hover {
     color: white;
 }
-

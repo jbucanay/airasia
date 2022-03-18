@@ -20,20 +20,29 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     
       <div class="navbar-nav">
-      <a class="navbar-brand" href="#">
+      <p class="navbar-brand">
       <img src="https://a.staticaa.com/images/logos/airasiacom_logo.svg" alt="" width="100" height="24" class="d-inline-block align-text-top">
      
-        </a>
+        </p>
         <?php 
-        if(isset($_SESSION['username'])){
+        if(isset($_SESSION['user'])){
             echo <<<_end
-
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            
             <a class="nav-link" href="#">Features</a>
             <a class="nav-link" href="#">Pricing</a>
             <a class="nav-link" href="#">Log out</a>
+            
 
             _end;
+
+            if($_SESSION['user']['role'] == 'Admin'){
+                echo <<<_END
+                <a class="nav-link" href="#">Add Customer</a>
+                <a class="nav-link" href="#">Add Giftcard</a>
+
+                _END;
+
+            }
         }
         
         ?>

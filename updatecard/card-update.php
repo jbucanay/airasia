@@ -14,12 +14,16 @@
   ?>
   
   </style>
+  <?php 
+  include_once "../navigation/navbar.php"
+  
+  ?>
     <title>Air Asia | Card Update</title>
 </head>
 <body>
 <?php 
 
-require_once "../login/login.php";
+
 
 $connection = new mysqli($host, $us, $pw, $db);
 if($connection->connect_error) die ("Connection not made");
@@ -66,7 +70,7 @@ for($i = 0; $i < $rows; ++$i){
         </div>
         <input type='hidden' name='update' value='yes'>
         <input type='hidden' name='cardId' value=$row[cardId]>
-        <button type="submit" class="btn btn-primary" value='Update'> Update</button>
+        <button type="submit" class="btn btn-danger" value='Update'> Update</button>
       </form>
       _END;
 
