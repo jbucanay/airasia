@@ -42,7 +42,7 @@ if($connection->connect_error) die ("Connection not made");
 $query = "SELECT * FROM giftcard WHERE cardId = $cardId";
 $result = $connection->query($query);
 if(!$result) die ("Database access failed");
-print_r($_SESSION['user']);
+
 
 $row = $result->fetch_array(MYSQLI_ASSOC);
 
