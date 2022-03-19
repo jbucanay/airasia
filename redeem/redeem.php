@@ -29,11 +29,13 @@ if(!isset($_SESSION['user'])){
 <div id='redeem_main'>
 <?php
 
+$connection = new mysqli($host, $us, $pw, $db);
+$userID = $_SESSION['user']['userId'];
 if(isset($_GET['cardId'])){
 $cardId = $_GET['cardId'];
-$connection = new mysqli($host, $us, $pw, $db);
+
 if($connection->connect_error) die ("Connection not made");
-$userID = $_SESSION['user']['userId'];
+
 
 //card query
 $card_q = "SELECT * FROM giftcard WHERE cardId = $cardId";
@@ -43,7 +45,7 @@ $card_results = $connection->query($card_q)->fetch_assoc();
 $account_q = "SELECT * FROM account WHERE userID = $userID";
 $account_results = $connection->query($account_q)->fetch_assoc();
 
-$balance = $account_results['points'];
+ 
 
 if($account_results['points'] > $card_results['points'] && $account_results['points'] > 0){
 
@@ -62,15 +64,71 @@ if($account_results['points'] > $card_results['points'] && $account_results['poi
     $redemption_q = "INSERT INTO redemption (date,accountId,cardId,pointsRedeemed)VALUES('$timestamp',$account_id,$cardId, $redeemed)";
     $res = $connection->query($redemption_q);
     print_r($res);
-
+header('Location: ../redeem/redeem.php');
    
     
 
 }
 
 
+}
+
+$account_q = "SELECT * FROM account WHERE userID = $userID";
+$account_results = $connection->query($account_q)->fetch_assoc();
+
+$acc_id = $account_results['accountId'];
+$balance = $account_results['points'];
+
+$get_rede = "SELECT * FROM redemption WHERE accountId = $acc_id";
+$res = $connection->query($get_rede)->fetch_all(MYSQLI_NUM);
+
+echo <<<_end
+
+<div style="width: 18rem;">
+  <div class="card-header">
+    You have $balance points available
+    
+    
+  </div>
+  <br>
+  <br>
+  <p>Below is a list of your redeemed cards with a date and points</p>
+
+
+_end;
+
+echo "<br>";
+echo "<br>";
+echo "<br>";
+
+foreach($res as $row){
+    echo <<<_end
+    
+        <div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Date: $row[1]</li>
+        <li class="list-group-item">Points: $row[4]</li>
+    </ul>
+    </div>
+
+    _end;
+
+    echo "<br>";
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
