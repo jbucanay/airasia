@@ -69,8 +69,8 @@ for ($i=0;$i<$rows;++$i){
         <div class="card-body">
           <h5 class="card-title">$cardName</h5>
           <p class="card-text">$cardType</p>
-          <h5 class="card-title">$$cardValue</h5>
-          <p class="card-text">$points</p>
+          <h5 class="card-title">Value:$cardValue</h5>
+          <p class="card-text">Point: $points</p>
         </div>
       </div></a>
     </div> 

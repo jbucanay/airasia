@@ -63,13 +63,13 @@ $row = $result->fetch_array(MYSQLI_ASSOC);
         <div class="card-body">
         <h5 class="card-title">$cardName</h5>
         <p class="card-text">$cardType</p>
-        <p class="card-text">$$cardValue</p>
-        <p class="card-text">$points</p>
+        <p class="card-text">Value: $cardValue</p>
+        <p class="card-text">Point: $points</p>
         </div>
         <div>
         <button type="submit" class="btn btn-warning" $admin_link><a href="../updatecard/card-update.php?cardId=$cardId" class='link'>Update</a></button>
         <button type="submit" class="btn btn-warning" $admin_link><a href="delete.php?delete=$cardId" class='link'>Delete</a></button>
-        <button type="submit" class="btn btn-warning" $cust_link><a href="../cart/cart.php?cardId=$cardId" class='link'>Add to cart</a></button>
+        <button type="submit" class="btn btn-warning" $cust_link><a href="../cart/cart.php?cardId=$cardId" class='link'>Redeem</a></button>
       
         </div>
 
