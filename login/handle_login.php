@@ -15,7 +15,7 @@ if(!empty($_POST['username']) && !empty($_POST['password'])){
 
     if(password_verify($password,$token)){
         session_start();
-        $_SESSION['cart'] = [];
+        $_SESSION['redeem'] = [];
         $_SESSION['user'] = $result;
 
         header('Location: ../cardlist/card-list.php');

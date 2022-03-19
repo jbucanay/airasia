@@ -58,18 +58,18 @@ $row = $result->fetch_array(MYSQLI_ASSOC);
     
     
     echo <<<_END
-        <div class="card" style="width: 50rem;">
+        <div class="card" style="width: 30rem;">
         <img src="https://images.unsplash.com/photo-1512916206820-bd6d503c003e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="gift card">
         <div class="card-body">
         <h5 class="card-title">$cardName</h5>
         <p class="card-text">$cardType</p>
         <p class="card-text">Value: $cardValue</p>
-        <p class="card-text">Point: $points</p>
+        <p class="card-text">Points: $points</p>
         </div>
         <div>
         <button type="submit" class="btn btn-warning" $admin_link><a href="../updatecard/card-update.php?cardId=$cardId" class='link'>Update</a></button>
         <button type="submit" class="btn btn-warning" $admin_link><a href="delete.php?delete=$cardId" class='link'>Delete</a></button>
-        <button type="submit" class="btn btn-warning" $cust_link><a href="../cart/cart.php?cardId=$cardId" class='link'>Redeem</a></button>
+        <button type="submit" class="btn btn-warning" $cust_link><a href="../redeem/redeem.php?cardId=$cardId" class='link'>Redeem</a></button>
       
         </div>
 
